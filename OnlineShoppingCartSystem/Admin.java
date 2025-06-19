@@ -2,8 +2,8 @@ package OnlineShoppingCartSystem;
 
 import java.util.Scanner;
 
-public class Customer extends User{
-    public Customer(String name, String password) {
+public class Admin extends User{
+    public Admin(String name, String password) {
         super(name, password);
     }
 
@@ -18,19 +18,19 @@ public class Customer extends User{
     public void showMenu(Scanner scanner) {
         boolean logout = false;
         while (!logout) {
-            System.out.println("\n--- Customer Menu ---");
-            System.out.println("1. View Profile");
+            System.out.println("\n--- Admin Menu ---");
+            System.out.println("1. View System Status");
             System.out.println("2. Logout");
             System.out.print("Choose option: ");
             String choice = scanner.nextLine();
 
             switch (choice) {
                 case "1":
-                    System.out.println("Customer Profile: Name: John Doe, ID: C001");
+                    System.out.println("System is running fine.");
                     break;
                 case "2":
                     logout = true;
-                    System.out.println("Customer logged out.");
+                    System.out.println("Admin logged out.");
                     break;
                 default:
                     System.out.println("Invalid option.");
