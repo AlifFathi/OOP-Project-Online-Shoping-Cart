@@ -4,7 +4,6 @@ import java.util.ArrayList;
 public class Cart {
     private ArrayList<Item> items;
     private int itemCount;
-
     
     public Cart(){
         this.items = new ArrayList<>();
@@ -26,8 +25,8 @@ public class Cart {
                 item.reduceQuantity(item.getQuantity());
                 items.remove(item);
             }
+            itemCount += item.getQuantity();
         }
-        itemCount = items.size();
     }
 
     public double getTotalPrice(){
@@ -36,6 +35,17 @@ public class Cart {
             totalPrice += item.getTotalPrice();
         }
         return totalPrice;
+    }
+
+    public void displayCart() {
+        if (items.isEmpty()) {
+            System.out.println("Cart is empty.");
+        } else {
+            System.out.println("Items in cart:");
+            for (Item item : items) {
+                System.out.println(item.itemName() + " - Quantity: " + item.getQuantity() + ", Price: " + item.getTotalPrice());
+            }
+        }
     }
 
 

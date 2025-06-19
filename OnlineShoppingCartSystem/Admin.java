@@ -1,6 +1,6 @@
 package OnlineShoppingCartSystem;
 
-import java.util.Scanner;
+import java.util.*;
 
 public class Admin extends User{
     public Admin(String name, String password) {
@@ -15,7 +15,7 @@ public class Admin extends User{
         return super.getPassword();
     }
 
-    public void showMenu(Scanner scanner) {
+    public void showMenu(Scanner scanner, ArrayList<Product> products) {
         boolean logout = false;
         while (!logout) {
             System.out.println("\n--- Admin Menu ---");

@@ -1,6 +1,6 @@
 package OnlineShoppingCartSystem;
 
-import java.util.Scanner;
+import java.util.*;
 
 public abstract class User {
     private String name;
@@ -19,6 +19,6 @@ public abstract class User {
         return password;
     }
 
-    public abstract void showMenu(Scanner scanner);
+    public abstract void showMenu(Scanner scanner, ArrayList<Product> products);
 }
 

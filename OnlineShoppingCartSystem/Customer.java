@@ -1,6 +1,6 @@
 package OnlineShoppingCartSystem;
 
-import java.util.Scanner;
+import java.util.*;
 
 public class Customer extends User{
     public Customer(String name, String password) {
@@ -15,25 +15,45 @@ public class Customer extends User{
         return super.getPassword();
     }
 
-    public void showMenu(Scanner scanner) {
+    public void showMenu(Scanner scanner, ArrayList<Product> products) {
         boolean logout = false;
+        Cart cart = new Cart();
         while (!logout) {
             System.out.println("\n--- Customer Menu ---");
-            System.out.println("1. View Profile");
-            System.out.println("2. Logout");
+            System.out.println("1. View Products");
+            System.out.println("2. Add to Cart");
+            System.out.println("3. Remove from Cart");
+            System.out.println("4. View Cart");
+            System.out.println("5. Checkout");
             System.out.print("Choose option: ");
             String choice = scanner.nextLine();
-
+            
             switch (choice) {
                 case "1":
-                    System.out.println("Customer Profile: Name: John Doe, ID: C001");
+                    OnlineShoppingCartSystem.viewProducts(products);
                     break;
                 case "2":
-                    logout = true;
-                    System.out.println("Customer logged out.");
+                    OnlineShoppingCartSystem.viewProducts(products);
+
+                    System.out.print("Enter product name to add: ");
+                    String productName = scanner.nextLine();
+                    System.out.print("Enter quantity: ");
+                    int quantity = Integer.parseInt(scanner.nextLine());
+
+                    for (Product product : products) {
+                        if (product.getName().equalsIgnoreCase(productName)) {
+                            cart.addItem(product, quantity);
+                            System.out.println("Added " + quantity + " of " + productName + " to cart.");
+                            break;
+                        }
+                    }
+
                     break;
-                default:
-                    System.out.println("Invalid option.");
+                case "3":
+                    break;
+                case "4":
+                    cart.displayCart();
+                    break;
             }
         }
     }
