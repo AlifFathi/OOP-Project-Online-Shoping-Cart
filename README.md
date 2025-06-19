@@ -3,5 +3,5 @@ This project is a simple online shopping cart system built using Java. It allows
 
 ## Contributors
 1. [Iman Abadi Bin Mohd Nizwan](https://github.com/imn353) (A23CS0084)
-2. [Mohammed Alif Fathi Bin Abdul Latif](https://github.com/AlifFathi) (A23CS0112)
+2. [Mohamed Alif Fathi Bin Abdul Latif](https://github.com/AlifFathi) (A23CS0112)
 
