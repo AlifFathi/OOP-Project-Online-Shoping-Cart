@@ -3,6 +3,8 @@ package OnlineShoppingCartSystem;
 import java.util.*;
 
 public class Customer extends User{
+    private ArrayList<Order> orders;
+    private Cart cart;
     public Customer(String name, String password) {
         super(name, password);
     }
@@ -19,6 +21,7 @@ public class Customer extends User{
         boolean logout = false;
         Cart cart = new Cart();
         while (!logout) {
+            OnlineShoppingCartSystem.clearScreen();
             System.out.println("\n--- Customer Menu ---");
             System.out.println("1. View Products");
             System.out.println("2. Add to Cart");
@@ -30,10 +33,10 @@ public class Customer extends User{
             
             switch (choice) {
                 case "1":
-                    OnlineShoppingCartSystem.viewProducts(products);
+                    this.viewProducts(products);
                     break;
                 case "2":
-                    OnlineShoppingCartSystem.viewProducts(products);
+                    this.viewProducts(products);
 
                     System.out.print("Enter product name to add: ");
                     String productName = scanner.nextLine();

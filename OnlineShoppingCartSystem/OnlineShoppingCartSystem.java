@@ -2,6 +2,7 @@ package OnlineShoppingCartSystem;
 
 import java.util.*;
 
+
 public class OnlineShoppingCartSystem {
     public static void main(String[] args) {
         // Create an admin user
@@ -34,12 +35,13 @@ public class OnlineShoppingCartSystem {
             } else if (username.equals(customer.getName()) && password.equals(customer.getPassword())) {
                 currentUser = customer;
             } else {
+                clearScreen();
                 System.out.println("Invalid username or password. Please try again.");
                 continue;
             }
 
             currentUser.showMenu(scanner, products);
-
+            clearScreen();
             System.out.print("\nDo you want to exit the system? (yes/no): ");
             String response = scanner.nextLine().toLowerCase();
             if (response.equals("yes")) {
@@ -50,15 +52,10 @@ public class OnlineShoppingCartSystem {
         System.out.println("Goodbye!");
         scanner.close();
     }
-    public static void viewProducts(ArrayList<Product> products) {
-        if (products.isEmpty()) {
-            System.out.println("No products available.");
-        } else {
-            System.out.println("Available Products:");
-            for (Product product : products) {
-                System.out.println(product.getName() + " - Price: " + product.getPrice());
-            }
-        }
+
+    public static void clearScreen(){
+        System.out.print("\033[H\033[2J");
+        System.out.flush();
     }
 
 }
