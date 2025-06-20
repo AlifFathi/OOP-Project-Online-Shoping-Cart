@@ -1,19 +1,23 @@
 package OnlineShoppingCartSystem;
-
 import java.util.*;
-
 
 public abstract class User {
     private String name;
+    private String userID;
     private String password;
-    public User(String name, String password)
+    public User(String name, String userID, String password)
     {
         this.name = name;
+        this.userID = userID;
         this.password = password;
     }
 
     public String getName() {
         return name;
+    }
+
+    public String getID() {
+        return userID;
     }
 
     public String getPassword() {
@@ -28,7 +32,7 @@ public abstract class User {
         for (Product product : products) {
             System.out.println("Name: " + product.getName() + ", Price: " + product.getPrice() + ", Stock: " + product.getStock());
         }
-        System.out.println("\n");
+        System.out.println("---------------------------");
     }
 }
 

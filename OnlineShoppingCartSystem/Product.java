@@ -27,6 +27,14 @@ public class Product {
         this.stock += stock; 
     }
 
+    public void reduceStock(int quantity) {
+        if (this.stock >= quantity) {
+            this.stock -= quantity;
+        } else {
+            System.out.println("Insufficient stock for " + this.name);
+        }
+    }
+
     public boolean inStock(int quantity) {
         return this.stock >= quantity;
     }

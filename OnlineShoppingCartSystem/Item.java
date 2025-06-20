@@ -3,7 +3,6 @@ package OnlineShoppingCartSystem;
 public class Item {
     private Product product;
     private int quantity;
-    private double totalPrice;
 
     public Item(Product product, int quantity) {
         this.product = product;
@@ -30,11 +29,7 @@ public class Item {
         return product;
     }
 
-    public double getTotalPrice() {
-        totalPrice = product.getPrice() * quantity;
-        return totalPrice;
+    public double calculateTotalPrice() {
+        return product.getPrice() * quantity;
     }
-
-
-
 }

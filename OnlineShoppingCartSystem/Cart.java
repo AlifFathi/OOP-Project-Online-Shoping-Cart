@@ -1,22 +1,15 @@
 package OnlineShoppingCartSystem;
-import java.util.ArrayList;
+import java.util.*;
 
 public class Cart {
     private ArrayList<Item> items;
-    private int itemCount;
     
     public Cart(){
         this.items = new ArrayList<>();
-        this.itemCount = 0;
     }
     public void addItem(Product product, int quantity){
         Item cartItem = new Item(product, quantity);
         items.add(cartItem);
-        itemCount += quantity;
-    }
-
-    public int getItemCount(){
-        return itemCount;
     }
 
     public void removeItem(String name){
@@ -25,14 +18,13 @@ public class Cart {
                 item.reduceQuantity(item.getQuantity());
                 items.remove(item);
             }
-            itemCount += item.getQuantity();
         }
     }
 
     public double getTotalPrice(){
         double totalPrice = 0;
         for (Item item : items) {
-            totalPrice += item.getTotalPrice();
+            totalPrice += item.calculateTotalPrice();
         }
         return totalPrice;
     }
@@ -43,10 +35,16 @@ public class Cart {
         } else {
             System.out.println("Items in cart:");
             for (Item item : items) {
-                System.out.println(item.itemName() + " - Quantity: " + item.getQuantity() + ", Price: " + item.getTotalPrice());
+                System.out.println(item.itemName() + " - Quantity: " + item.getQuantity() + ", Price: " + item.calculateTotalPrice());
             }
         }
     }
 
+    public ArrayList<Item> getItems() {
+        return items;
+    }
 
+    public boolean isEmpty() {
+        return items.isEmpty();
+    }
 }

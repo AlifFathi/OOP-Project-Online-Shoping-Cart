@@ -3,12 +3,16 @@ package OnlineShoppingCartSystem;
 import java.util.*;
 
 public class Admin extends User{
-    public Admin(String name, String password) {
-        super(name, password);
+    public Admin(String name, String userID, String password) {
+        super(name, userID, password);
     }
 
     public String getName() {
         return super.getName();
+    }
+
+    public String getID() {
+        return super.getID();
     }
 
     public String getPassword() {
@@ -31,15 +35,15 @@ public class Admin extends User{
                 case "1":
                     boolean exit = false;
                     while (!exit) {
-                    this.viewProducts(products);
-                    System.out.print("Do you want to exit? (yes/no): ");
-                    String response = scanner.nextLine().toLowerCase();
-                    if (response.equals("yes")) {
-                        exit = true;
-                    }
-                    else if (response.equals("no")) {
-                        exit = false;
-                    }
+                        this.viewProducts(products);
+                        System.out.print("Do you want to exit? (yes/no): ");
+                        String response = scanner.nextLine().toLowerCase();
+                        if (response.equals("yes")) {
+                            exit = true;
+                        }
+                        else if (response.equals("no")) {
+                            exit = false;
+                        }
                     }
                     break;
                 case "2":
@@ -54,8 +58,6 @@ public class Admin extends User{
             }
         }
     }
-
-
     public void restockProducts(Scanner scanner, ArrayList<Product> products){
         this.viewProducts(products);
         System.out.print("Enter product name restock: ");

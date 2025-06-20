@@ -2,13 +2,15 @@ package OnlineShoppingCartSystem;
 
 import java.util.*;
 
-
 public class OnlineShoppingCartSystem {
     public static void main(String[] args) {
-        // Create an admin user
+        // Create user
+        ArrayList<User> users = new ArrayList<>();
+        users.add(new Admin("IMAN ABADI", "admin", "admin123"));
+        users.add(new Admin("NUR AZURA", "azura", "azura123"));
+        users.add(new Customer("MOHAMED ALIF FATHI", "ali", "ali123"));
+        users.add(new Customer("SITI NURHALIZA", "siti", "siti123"));
 
-        Admin admin = new Admin("admin", "admin123");
-        Customer customer = new Customer("ali", "ali123");
         ArrayList<Product> products = new ArrayList<>();
         // Sample products
         products.add(new Product("Laptop", 1500.00, 10));
@@ -30,11 +32,14 @@ public class OnlineShoppingCartSystem {
 
             User currentUser = null;
 
-            if (username.equals(admin.getName()) && password.equals(admin.getPassword())) {
-                currentUser = admin;
-            } else if (username.equals(customer.getName()) && password.equals(customer.getPassword())) {
-                currentUser = customer;
-            } else {
+            for (User user : users) {
+                if (username.equals(user.getID()) && password.equals(user.getPassword())) {
+                    currentUser = user;
+                    break;
+                }
+            }
+
+            if (currentUser == null) {
                 clearScreen();
                 System.out.println("Invalid username or password. Please try again.");
                 continue;
@@ -53,9 +58,8 @@ public class OnlineShoppingCartSystem {
         scanner.close();
     }
 
-    public static void clearScreen(){
+    public static void clearScreen() {
         System.out.print("\033[H\033[2J");
         System.out.flush();
     }
-
 }
