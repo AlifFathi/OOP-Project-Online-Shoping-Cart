@@ -26,6 +26,8 @@ public abstract class User {
 
     public abstract void showMenu(Scanner scanner, ArrayList<Product> products);
 
+    public abstract void showOrders();
+
     public void viewProducts(ArrayList<Product> products) {
         OnlineShoppingCartSystem.clearScreen();
         System.out.println("\n--- Available Products ---");

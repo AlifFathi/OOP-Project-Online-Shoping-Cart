@@ -6,10 +6,16 @@ public class OnlineShoppingCartSystem {
     public static void main(String[] args) {
         // Create user
         ArrayList<User> users = new ArrayList<>();
-        users.add(new Admin("IMAN ABADI", "admin", "admin123"));
-        users.add(new Admin("NUR AZURA", "azura", "azura123"));
-        users.add(new Customer("MOHAMED ALIF FATHI", "ali", "ali123"));
-        users.add(new Customer("SITI NURHALIZA", "siti", "siti123"));
+        ArrayList<Customer> customers = new ArrayList<>();
+        Customer cust1 = new Customer("MOHAMED ALIF FATHI", "ali", "ali123");
+        Customer cust2 = new Customer("SITI NURHALIZA", "siti", "siti123");
+        customers.add(cust1);
+        customers.add(cust2);
+        Admin admin = new Admin("IMAN ABADI", "admin", "admin123", customers);
+        users.add(admin);
+        users.add(cust1);
+        users.add(cust2);
+        
 
         ArrayList<Product> products = new ArrayList<>();
         // Sample products

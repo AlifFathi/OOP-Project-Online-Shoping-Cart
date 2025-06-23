@@ -17,6 +17,7 @@ public class Cart {
             if (item.itemName().equals(name)) {
                 item.reduceQuantity(item.getQuantity());
                 items.remove(item);
+                break;
             }
         }
     }

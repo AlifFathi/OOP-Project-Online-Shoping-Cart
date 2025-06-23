@@ -26,9 +26,9 @@ public class Order {
         return orderDate;
     }
     public void displayOrderDetails() {
-        System.out.println("Customer: " + customer.getName());
-        System.out.println("Order Date: " + orderDate);
-        System.out.println("Total Price: " + totalPrice);
+        System.out.println("Customer: " + this.customer.getName());
+        System.out.println("Order Date: " + this.orderDate);
+        System.out.println("Total Price: " + this.totalPrice);
         System.out.println("Items in Order:");
         cart.displayCart();
     }

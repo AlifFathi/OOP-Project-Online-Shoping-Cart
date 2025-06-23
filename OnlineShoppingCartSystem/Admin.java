@@ -3,8 +3,10 @@ package OnlineShoppingCartSystem;
 import java.util.*;
 
 public class Admin extends User{
-    public Admin(String name, String userID, String password) {
+    private ArrayList<Customer> customers;
+    public Admin(String name, String userID, String password, ArrayList<Customer> customers) {
         super(name, userID, password);
+        this.customers = customers;
     }
 
     public String getName() {
@@ -26,7 +28,7 @@ public class Admin extends User{
             System.out.println("\n--- Admin Menu ---");
             System.out.println("1. View Products");
             System.out.println("2. Restock Products");
-            System.out.println("3. Manage Orders");
+            System.out.println("3. View Customers' Orders");
             System.out.println("4. Logout");
             System.out.print("Choose option: ");
             String choice = scanner.nextLine();
@@ -49,6 +51,9 @@ public class Admin extends User{
                 case "2":
                     this.restockProducts(scanner, products);
                     break;
+                case "3":
+                    this.showOrders();
+                    break;
                 case "4":
                     logout = true;
                     System.out.println("Admin logged out.");
@@ -65,16 +70,25 @@ public class Admin extends User{
         System.out.print("Enter quantity: ");
         int quantity = Integer.parseInt(scanner.nextLine());
 
+        boolean found = false;
         for (Product product : products) {
             if (product.getName().equalsIgnoreCase(productName)) {
                 product.reStock(quantity);
                 System.out.println("Added " + quantity + " of " + productName + " to cart.");
+                found = true;
                 break;
             }
-            else {
-                System.out.println("Product not found.");
-                break;
-            }
+        }
+
+        if (!found) {
+            System.out.println("Product not found.");
+        }
+    }
+
+    public void showOrders(){
+        for (Customer customer : customers) {
+            customer.showOrders();
+            System.out.println("");
         }
     }
 

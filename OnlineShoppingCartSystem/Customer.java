@@ -3,8 +3,8 @@ package OnlineShoppingCartSystem;
 import java.util.*;
 
 public class Customer extends User{
-    private ArrayList<Order> orders;
     private Cart cart;
+    private ArrayList<Order> orders;
     public Customer(String name, String userID, String password) {
         super(name, userID, password);
         this.orders = new ArrayList<>();
@@ -26,7 +26,7 @@ public class Customer extends User{
     public void showMenu(Scanner scanner, ArrayList<Product> products) {
         boolean logout = false;
         while (!logout) {
-            //OnlineShoppingCartSystem.clearScreen();
+            //OnlineShoppingCartSystem.clearScreen();  
             System.out.println("\n--- Customer Menu ---");
             System.out.println("1. View Products");
             System.out.println("2. Add to Cart");
@@ -112,6 +112,7 @@ public class Customer extends User{
                         // Create an order
                         Order order = new Order(this, cart, totalPrice, new Date().toString());
                         this.orders.add(order);
+                        //admin.addOrders(order);
                         // Clear the cart after checkout
                         cart = new Cart();
                     } else {
@@ -119,19 +120,23 @@ public class Customer extends User{
                     }
                     break;
                 case "6":
-                    if (this.orders.isEmpty()) {
-                        System.out.println("No orders found.");
-                    } else {
-                        System.out.println("Your Orders:");
-                        for (Order order : this.orders) {
-                            order.displayOrderDetails();
-                        }
-                    }
+                    this.showOrders();
                     break;
                 case "7":
                     logout = true;
                     System.out.println("Customer logged out.");
                     break;
+            }
+        }
+    }
+
+    public void showOrders(){
+        if (this.orders.isEmpty()) {
+            System.out.println("No orders found.");
+        } else {
+            System.out.println("Your Orders:");
+            for (Order order : this.orders) {
+                order.displayOrderDetails();
             }
         }
     }
