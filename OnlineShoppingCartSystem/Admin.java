@@ -38,12 +38,11 @@ public class Admin extends User{
                     boolean exit = false;
                     while (!exit) {
                         this.viewProducts(products);
-                        System.out.print("Do you want to exit? (yes/no): ");
+                        System.out.print("Press enter to continue: ");
                         String response = scanner.nextLine().toLowerCase();
-                        if (response.equals("yes")) {
+                        if (response.equals("")) {
                             exit = true;
-                        }
-                        else if (response.equals("no")) {
+                        } else {
                             exit = false;
                         }
                     }

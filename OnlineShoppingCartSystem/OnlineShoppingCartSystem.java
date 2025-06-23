@@ -29,7 +29,7 @@ public class OnlineShoppingCartSystem {
         boolean exit = false;
 
         while (!exit) {
-            System.out.println("\n--- Login Lu ---");
+            System.out.println("\n--- Welcome to Online Shopping Cart System (SHOPEE CIPLAK)---");
             System.out.print("Username: ");
             String username = scanner.nextLine();
 
