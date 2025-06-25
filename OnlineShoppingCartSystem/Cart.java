@@ -1,18 +1,20 @@
 package OnlineShoppingCartSystem;
+
 import java.util.*;
 
 public class Cart {
     private ArrayList<Item> items;
-    
-    public Cart(){
+
+    public Cart() {
         this.items = new ArrayList<>();
     }
-    public void addItem(Product product, int quantity){
+
+    public void addItem(Product product, int quantity) {
         Item cartItem = new Item(product, quantity);
         items.add(cartItem);
     }
 
-    public void removeItem(String name){
+    public void removeItem(String name) {
         for (Item item : items) {
             if (item.itemName().equals(name)) {
                 item.reduceQuantity(item.getQuantity());
@@ -22,7 +24,7 @@ public class Cart {
         }
     }
 
-    public double getTotalPrice(){
+    public double getTotalPrice() {
         double totalPrice = 0;
         for (Item item : items) {
             totalPrice += item.calculateTotalPrice();
@@ -36,7 +38,8 @@ public class Cart {
         } else {
             System.out.println("Items in cart:");
             for (Item item : items) {
-                System.out.println(item.itemName() + " - Quantity: " + item.getQuantity() + ", Price: " + item.calculateTotalPrice());
+                System.out.println(item.itemName() + " - Quantity: " + item.getQuantity() + ", Price: "
+                        + item.calculateTotalPrice());
             }
         }
     }

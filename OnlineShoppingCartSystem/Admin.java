@@ -1,9 +1,11 @@
 package OnlineShoppingCartSystem;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Scanner;
 
-public class Admin extends User{
+public class Admin extends User {
     private ArrayList<Customer> customers;
+
     public Admin(String name, String userID, String password, ArrayList<Customer> customers) {
         super(name, userID, password);
         this.customers = customers;
@@ -24,71 +26,134 @@ public class Admin extends User{
     public void showMenu(Scanner scanner, ArrayList<Product> products) {
         boolean logout = false;
         while (!logout) {
-            OnlineShoppingCartSystem.clearScreen();
-            System.out.println("\n--- Admin Menu ---");
-            System.out.println("1. View Products");
-            System.out.println("2. Restock Products");
-            System.out.println("3. View Customers' Orders");
-            System.out.println("4. Logout");
-            System.out.print("Choose option: ");
-            String choice = scanner.nextLine();
+            try {
+                System.out.println("\n--- Admin Menu ---");
+                System.out.println("1. View Products");
+                System.out.println("2. Restock Products");
+                System.out.println("3. View Customers' Orders");
+                System.out.println("4. Logout");
+                System.out.print("Choose option: ");
+                String choice = scanner.nextLine();
+                System.out.println();
 
-            switch (choice) {
-                case "1":
-                    boolean exit = false;
-                    while (!exit) {
-                        this.viewProducts(products);
-                        System.out.print("Press enter to continue: ");
-                        String response = scanner.nextLine().toLowerCase();
-                        if (response.equals("")) {
-                            exit = true;
-                        } else {
-                            exit = false;
-                        }
-                    }
-                    break;
-                case "2":
-                    this.restockProducts(scanner, products);
-                    break;
-                case "3":
-                    this.showOrders();
-                    break;
-                case "4":
-                    logout = true;
-                    System.out.println("Admin logged out.");
-                    break;
-                default:
-                    System.out.println("Invalid option.");
+                switch (choice) {
+                    case "1":
+                        viewProducts(products);
+                        System.out.print("\nPress Enter to return to the menu...");
+                        scanner.nextLine();
+                        OnlineShoppingCartSystem.clearScreen();
+                        break;
+                    case "2":
+                        restockProducts(scanner, products);
+                        System.out.print("\nPress Enter to return to the menu...");
+                        scanner.nextLine();
+                        OnlineShoppingCartSystem.clearScreen();
+                        break;
+                    case "3":
+                        showOrders();
+                        System.out.print("\nPress Enter to return to the menu...");
+                        scanner.nextLine();
+                        OnlineShoppingCartSystem.clearScreen();
+                        break;
+                    case "4":
+                        logout = true;
+                        System.out.println("Admin logged out.");
+                        break;
+                    default:
+                        OnlineShoppingCartSystem.clearScreen();
+                        System.out.println("Invalid option. Please choose a number between 1-7.");
+                        break;
+                }
+            } catch (Exception e) {
+                System.out.println("An error occurred: " + e.getMessage());
+                System.out.println("Please try again.");
             }
         }
     }
-    public void restockProducts(Scanner scanner, ArrayList<Product> products){
-        this.viewProducts(products);
-        System.out.print("Enter product name restock: ");
-        String productName = scanner.nextLine();
-        System.out.print("Enter quantity: ");
-        int quantity = Integer.parseInt(scanner.nextLine());
 
-        boolean found = false;
-        for (Product product : products) {
-            if (product.getName().equalsIgnoreCase(productName)) {
-                product.reStock(quantity);
-                System.out.println("Added " + quantity + " of " + productName + " to cart.");
-                found = true;
+    private void restockProducts(Scanner scanner, ArrayList<Product> products) {
+        try {
+            if (products == null || products.isEmpty()) {
+                System.out.println("No products available to restock.");
+                return;
+            }
+
+            this.viewProducts(products);
+            System.out.print("Enter product name to restock: ");
+            String productName = scanner.nextLine().trim();
+
+            if (productName.isEmpty()) {
+                System.out.println("Product name cannot be empty.");
+                return;
+            }
+
+            System.out.print("Enter quantity to add: ");
+            String quantityInput = scanner.nextLine().trim();
+
+            if (quantityInput.isEmpty()) {
+                System.out.println("Quantity cannot be empty.");
+                return;
+            }
+
+            int quantity;
+            try {
+                quantity = Integer.parseInt(quantityInput);
+                if (quantity <= 0) {
+                    System.out.println("Quantity must be a positive number.");
+                    return;
+                }
+            } catch (NumberFormatException e) {
+                System.out.println("Invalid quantity. Please enter a valid number.");
+                return;
+            }
+
+            Product foundProduct = findProductByName(products, productName);
+            if (foundProduct == null) {
+                System.out.println("Product '" + productName + "' not found.");
+                return;
+            }
+
+            int oldStock = foundProduct.getStock();
+            foundProduct.reStock(quantity);
+            int newStock = foundProduct.getStock();
+
+            System.out.println("Successfully restocked " + quantity + " units of " + productName + ".");
+            System.out.println("Stock updated: " + oldStock + " to " + newStock);
+
+        } catch (Exception e) {
+            System.out.println("Error restocking product: " + e.getMessage());
+        }
+    }
+
+    public void showOrders() {
+        boolean hasOrders = false;
+
+        // First, check if any customer has orders
+        for (Customer customer : customers) {
+            if (!customer.getOrder().isEmpty()) {
+                hasOrders = true;
                 break;
             }
         }
 
-        if (!found) {
-            System.out.println("Product not found.");
+        if (!hasOrders) {
+            System.out.println("No orders found");
+            return;
         }
-    }
 
-    public void showOrders(){
+        // Display orders if they exist
         for (Customer customer : customers) {
-            customer.showOrders();
-            System.out.println("");
+            if (customer.getOrder().isEmpty()) {
+                continue;
+            }
+            System.out.println("Customer: " + customer.getName());
+            ArrayList<Order> orders = customer.getOrder();
+            System.out.println("----------------------------------------");
+            for (Order order : orders) {
+                order.displayOrderDetails();
+                System.out.println("----------------------------------------");
+            }
+            System.out.println();
         }
     }
-
 }

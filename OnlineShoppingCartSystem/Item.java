@@ -8,9 +8,13 @@ public class Item {
         this.product = product;
         this.quantity = quantity;
     }
-    
-    public int getQuantity(){
+
+    public int getQuantity() {
         return quantity;
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
     }
 
     public void addQuantity(int quantity) {
@@ -21,11 +25,11 @@ public class Item {
         this.quantity -= quantity;
     }
 
-    public String itemName(){
+    public String itemName() {
         return product.getName();
     }
 
-    public Product getItem(){
+    public Product getItem() {
         return product;
     }
 

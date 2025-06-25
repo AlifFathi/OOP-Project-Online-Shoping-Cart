@@ -1,12 +1,14 @@
 package OnlineShoppingCartSystem;
-import java.util.*;
+
+import java.util.ArrayList;
+import java.util.Scanner;
 
 public abstract class User {
     private String name;
     private String userID;
     private String password;
-    public User(String name, String userID, String password)
-    {
+
+    public User(String name, String userID, String password) {
         this.name = name;
         this.userID = userID;
         this.password = password;
@@ -32,9 +34,22 @@ public abstract class User {
         OnlineShoppingCartSystem.clearScreen();
         System.out.println("\n--- Available Products ---");
         for (Product product : products) {
-            System.out.println("Name: " + product.getName() + ", Price: " + product.getPrice() + ", Stock: " + product.getStock());
+            System.out.println(
+                    "Name: " + product.getName() + ", Price: " + product.getPrice() + ", Stock: " + product.getStock());
         }
         System.out.println("---------------------------");
     }
-}
 
+    public Product findProductByName(ArrayList<Product> products, String productName) {
+        if (products == null || productName == null) {
+            return null;
+        }
+
+        for (Product product : products) {
+            if (product.getName().equalsIgnoreCase(productName)) {
+                return product;
+            }
+        }
+        return null;
+    }
+}
