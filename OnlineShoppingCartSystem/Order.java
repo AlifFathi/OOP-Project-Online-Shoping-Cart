@@ -6,8 +6,7 @@ public class Order {
     private double totalPrice;
     private String orderDate;
 
-    public Order(Customer customer, Cart cart, double totalPrice, String orderDate) {
-        this.customer = customer;
+    public Order(Cart cart, double totalPrice, String orderDate) {
         this.cart = cart;
         this.totalPrice = totalPrice;
         this.orderDate = orderDate;

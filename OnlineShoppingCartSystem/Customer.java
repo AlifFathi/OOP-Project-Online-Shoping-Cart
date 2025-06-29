@@ -324,7 +324,7 @@ public class Customer extends User {
                 }
 
                 // Create order
-                Order order = new Order(this, cart, totalPrice, new Date().toString());
+                Order order = new Order(cart, totalPrice, new Date().toString());
                 this.orders.add(order);
 
                 System.out.println("Checkout successful. Thank you for your purchase!");
