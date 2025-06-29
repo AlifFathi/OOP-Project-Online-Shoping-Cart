@@ -170,7 +170,7 @@ public class Customer extends User {
 
             if (existingItem != null) {
                 // Update existing item quantity
-                existingItem.setQuantity(existingItem.getQuantity() + quantityToAdd);
+                existingItem.addQuantity(quantityToAdd);
                 System.out.println("Added " + quantityToAdd + " of " + productName + " to cart.");
                 System.out.println("Total " + productName + " in cart: " + existingItem.getQuantity());
             } else {
