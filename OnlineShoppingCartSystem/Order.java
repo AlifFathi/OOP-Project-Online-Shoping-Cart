@@ -1,7 +1,6 @@
 package OnlineShoppingCartSystem;
 
 public class Order {
-    private Customer customer;
     private Cart cart;
     private double totalPrice;
     private String orderDate;
@@ -10,10 +9,6 @@ public class Order {
         this.cart = cart;
         this.totalPrice = totalPrice;
         this.orderDate = orderDate;
-    }
-
-    public Customer getCustomer() {
-        return customer;
     }
 
     public Cart getCart() {
